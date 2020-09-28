@@ -1,0 +1,21 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "Bandapixels1!",
+    "database": "gas",
+    "synchronize": true,
+    "socketPath": "/Applications/MAMP/tmp/mysql/mysql.sock",
+    "logging": false,
+    "entities": [
+        "./src/models/**/*.ts"
+    ],
+    "migrations": [
+        "./src/models/**/*.ts"
+    ],
+    "cli": {
+        "entitiesDir": "src/models",
+        "migrationsDir": "src/migration"
+    }
+}
