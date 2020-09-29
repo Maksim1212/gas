@@ -6,6 +6,6 @@ const userDataValidation = [
     body('threshold').isLength({ min: 1, max: 12 }).trim(),
     validateData,
 ];
-const unsubscribeValidation = [query('email').isEmail().trim(), validateData];
+const unsubscribeValidation = [query('uuid').isString().isLength({ min: 20, max: 50 }).trim(), validateData];
 
 export { userDataValidation, unsubscribeValidation };

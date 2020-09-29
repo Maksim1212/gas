@@ -6,7 +6,7 @@ import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as session from 'express-session';
 import { createConnection } from 'typeorm';
-import MailRouter from '../routes/user-router';
+import UserRouter from '../routes/user-router';
 import 'reflect-metadata';
 import sessionSecret from '../config/config';
 import ValidationError from '../error/validation-error';
@@ -66,7 +66,7 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
-app.use('/mail', MailRouter);
+app.use('/mail', UserRouter);
 
 /**
  * Forwards any requests to the /posts URI to PostRouter.
