@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository, LessThan } from 'typeorm';
+import { getRepository, MoreThan } from 'typeorm';
 import fetch from 'node-fetch';
 import { CronJob } from 'cron';
 import Decimal from 'decimal.js';
@@ -21,8 +21,10 @@ export async function createUser(req: Request, res: Response): Promise<Response>
         const results = await getRepository(User).save(user);
         return res.status(200).json(results);
     }
-    const user = await getRepository(User).update(isUser.id, { threshold: req.body.threshold });
-    return res.status(200).json(user);
+    await getRepository(User).update(isUser.id, { threshold: req.body.threshold });
+    return res.status(200).json({
+        message: 'user data updated',
+    });
 }
 
 export async function unsubscribe(req: Request, res: Response): Promise<Response> {
@@ -48,7 +50,8 @@ const job = new CronJob('0 */1 * * * *', () => {
         const average = new Decimal(gasJson.average).div(10);
 
         const gassCost = Number(gwei.mul(average));
-        const users = await getRepository(User).find({ threshold: LessThan(gassCost) });
+        console.log('gassCost', gassCost);
+        const users = await getRepository(User).find({ threshold: MoreThan(gassCost) });
 
         users.forEach((user) => {
             sendMail(user.email);
