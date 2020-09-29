@@ -12,6 +12,6 @@ userRouter.post('/create', userDataValidation, asyncHandler(UserController.creat
 
 userRouter.get('/unsubscribe', unsubscribeValidation, asyncHandler(UserController.unsubscribe));
 
-// userRouter.post('/send', asyncHandler(UserController.sendMail));
+userRouter.get('/confirm', asyncHandler(UserController.confirmUser));
 
 export default userRouter;

@@ -14,7 +14,7 @@ export default class Settings extends Component {
       handleSubmit = (event) => {
         alert('Сonfirmation has been sent to your email: ' + this.state.email);
     
-        fetch('https://dev1-api.bandapixels.foxyloxy.me/mail/create', {
+        fetch(`${process.env.API}`, {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {

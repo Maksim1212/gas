@@ -10,4 +10,7 @@ export default class User {
 
     @Column({ type: 'double precision' })
     threshold: number;
+
+    @Column({ type: 'boolean', default: false })
+    active: boolean;
 }
