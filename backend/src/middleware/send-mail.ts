@@ -5,7 +5,7 @@ export default async function sendMail(email: string, html: string): Promise<voi
     const msg = {
         to: email,
         from: process.env.SENDER_EMAIL,
-        subject: 'Sending with SendGrid is Fun',
+        subject: 'Gas price service info',
         text: 'Hello!',
         html,
     };
