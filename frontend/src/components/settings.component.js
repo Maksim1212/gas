@@ -6,7 +6,7 @@ export default class Settings extends Component {
         this.state = { email: '' };
         this.state = { threshold: null };
       }
-    
+      
       handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
       }
@@ -32,7 +32,6 @@ export default class Settings extends Component {
         return (
             <form onSubmit={this.handleSubmit} >
                 <h3>Get info</h3>
-
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" placeholder="Enter email" required
@@ -41,10 +40,14 @@ export default class Settings extends Component {
 
                 <div className="form-group">
                     <label>Threshold</label>
-                    <input className="form-control" placeholder="course" required 
+                    <input className="form-control" placeholder="course" required
                      value={this.state.value} name="threshold" onChange={this.handleChange}/>
                 </div>
-                 <input type="submit"  className="btn btn-primary btn-block" value="Submit" />
+                 <input type="submit"  className="btn btn-primary btn-block" value="Submit with Email" />
+                 <div>
+                 <br></br>
+                <a className="btn btn-primary btn-block" href="https://t.me/node_message_bot/">Use Telegram</a>
+                </div>
             </form>
         );
     }
