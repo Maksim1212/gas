@@ -10,6 +10,7 @@ import UserRouter from '../routes/user-router';
 import 'reflect-metadata';
 import sessionSecret from '../config/config';
 import ValidationError from '../error/validation-error';
+import job from '../middleware/cron-job';
 
 /**
  * @type {express}
@@ -77,12 +78,15 @@ app.use('/mail', UserRouter);
  * @param {callback} middleware - Express middleware.
  */
 
+job.start();
+
 /**
  * @description No results returned mean the object is not found
  * @function
  * @inner
  * @param {callback} middleware - Express middleware.
  */
+
 app.use((req: express.Request, res: express.Response) => {
     res.status(404).json({
         error: {
