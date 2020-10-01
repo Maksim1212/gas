@@ -4,7 +4,7 @@ import { Markup } from 'telegraf';
 import { getUsersEmails, getUsersTelegrams } from '../controllers/user-controller';
 import TelegramStrategy from '../helpers/telegram-strategy';
 import EmailStrategy from '../helpers/email-strategy';
-import Context from './cron-strategy';
+import Context from '../helpers/cron-strategy';
 
 const job = new CronJob('0 */1 * * * *', () => {
     async function getData(): Promise<void> {
