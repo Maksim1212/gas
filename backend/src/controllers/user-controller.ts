@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, MoreThan } from 'typeorm';
 
 import User from '../models/user';
 import sendMail from '../middleware/send-mail';
 import Telegram from '../models/telegram-user';
+import getGasPrice from '../helpers/get-gas-price';
+import UsersEmails from '../interfaces/users-emails.interface';
+import UsersTelegrams from '../interfaces/users-telegrams-interface';
 
 export async function createTelegramUser(chatId: number, threshold: number): Promise<void> {
     const isUser = await getRepository(Telegram).findOne({
@@ -87,4 +90,19 @@ export async function unsubscribe(req: Request, res: Response): Promise<Response
     return res.status(200).json({
         message: 'user unsubscribe successfully',
     });
+}
+
+export async function getUsersEmails(): Promise<Array<UsersEmails>> {
+    const gassCost = await getGasPrice();
+    const users = await getRepository(User).find({ threshold: MoreThan(gassCost) });
+    const activedUsers = users.filter((user) => {
+        return user.active === true;
+    });
+    return activedUsers;
+}
+
+export async function getUsersTelegrams(): Promise<Array<UsersTelegrams>> {
+    const gassCost = await getGasPrice();
+    const telegrams = await getRepository(Telegram).find({ threshold: MoreThan(gassCost) });
+    return telegrams;
 }
