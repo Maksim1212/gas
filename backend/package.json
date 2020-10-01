@@ -20,7 +20,6 @@
     },
     "homepage": "https://github.com/Maksim1212/gasService#readme",
     "dependencies": {
-        "@sendgrid/mail": "^7.2.6",
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
         "compression": "^1.7.4",
@@ -43,6 +42,7 @@
         "uuid": "^8.3.0"
     },
     "devDependencies": {
+        "@sendgrid/mail": "^7.2.6",
         "@types/bcrypt": "^3.0.0",
         "@types/compression": "^1.7.0",
         "@types/cookie-parser": "^1.4.2",
