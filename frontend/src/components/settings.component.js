@@ -12,9 +12,9 @@ export default class Settings extends Component {
       }
     
       handleSubmit = (event) => {
-        alert('Сonfirmation has been sent to your email: ' + this.state.email);
+        // alert('Сonfirmation has been sent to your email: ' + this.state.email);
     
-        fetch(`${process.env.API}`, {
+        fetch('http://localhost:3001/mail/create', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -22,6 +22,11 @@ export default class Settings extends Component {
             },
           }).then(function(response) {
             console.log(response)
+            if(response.status !== 200) {
+              alert('An error has occurred, please check the correctness of the filled in data and try a little later');
+              return response.json();
+            }
+            alert('Сonfirmation has been sent to your email');
             return response.json();
           });
     
